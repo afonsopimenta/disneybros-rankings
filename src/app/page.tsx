@@ -1,15 +1,27 @@
 import { headers } from "next/headers";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
+import { db } from "~/db";
+import { moviesTable } from "~/db/schema";
 import { auth } from "~/lib/auth";
+import { MovieCard } from "./movie-card";
 
-const MovieCard = ({ src }: { src: string }) => {
-  return (
-    <div className="max-w-xs overflow-hidden rounded-lg shadow-xl transition-all duration-200 hover:scale-105">
-      <Image src={src} alt="" width={1280} height={1920} />
-    </div>
-  );
+const getMovies = async () => {
+  "use cache";
+
+  return await db.select({ image: moviesTable.image }).from(moviesTable);
+};
+
+const getRandomMoviePair = (
+  movies: { image: string }[],
+): [{ image: string }, { image: string }] => {
+  const getRandomIndex = () => Math.floor(Math.random() * movies.length);
+
+  const index1 = getRandomIndex();
+  const index2 = getRandomIndex();
+
+  if (index1 == index2) return getRandomMoviePair(movies);
+  return [movies[index1]!, movies[index2]!];
 };
 
 const HomePage = async () => {
@@ -19,6 +31,9 @@ const HomePage = async () => {
     redirect("/sign-in");
   }
 
+  const movies = await getMovies();
+  const moviePair = getRandomMoviePair(movies);
+
   return (
     <main className="grid justify-center justify-items-center gap-4 px-8 py-16">
       <h1 className="text-4xl font-bold text-gray-800">🎬 Batalha de filmes</h1>
@@ -26,11 +41,11 @@ const HomePage = async () => {
         Qual destes filmes preferes? Clica no teu favorito!
       </p>
       <div className="flex items-center gap-8 py-8">
-        <MovieCard src="/brave.webp" />
+        <MovieCard src={moviePair[0].image} />
         <div>
           <span className="text-4xl font-bold text-gray-800">VS</span>
         </div>
-        <MovieCard src="/soul.webp" />
+        <MovieCard src={moviePair[1].image} />
       </div>
     </main>
   );
