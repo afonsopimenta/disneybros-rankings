@@ -1,0 +1,47 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "next build --turbopack",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "dev": "next dev --turbopack",
+    "format": "prettier --write . --cache",
+    "format:check": "prettier --check . --cache",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "start": "next start --turbopack",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.4",
+    "better-auth": "^1.2.8",
+    "drizzle-orm": "^0.43.1",
+    "jiti": "^2.4.2",
+    "next": "15.4.0-canary.34",
+    "postgres": "^3.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@tailwindcss/postcss": "^4.1.6",
+    "@types/node": "^22.15.18",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "babel-plugin-react-compiler": "19.1.0-rc.2",
+    "drizzle-kit": "^0.31.1",
+    "eslint": "^9.26.0",
+    "eslint-config-next": "^15.3.2",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.1.6",
+    "typescript": "^5.8.3"
+  }
+}
