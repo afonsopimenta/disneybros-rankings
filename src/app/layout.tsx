@@ -2,6 +2,12 @@ import "~/styles/globals.css";
 
 import { type ReactNode } from "react";
 import { type Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Disney Bros Rankings",
@@ -16,7 +22,11 @@ type RootLayoutProps = Readonly<{
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="pt">
-      <body>{children}</body>
+      <body
+        className={`${inter.variable} bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 font-sans text-base leading-relaxed font-normal text-gray-600`}
+      >
+        {children}
+      </body>
     </html>
   );
 };
